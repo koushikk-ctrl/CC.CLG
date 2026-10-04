@@ -1,36 +1,45 @@
+import java.util.Scanner;
 class Ei{
-int getLeftSum(int a[],int i)
-{
-int sum = 0;
-for(int j=0;j<i;j++){
-sum=sum+a[j];
+int getEquilibriumIndex(int a[]){
+int totalSum=0;
+for(int i=0;i<a.length;i++){
+totalSum=totalSum+a[i];
 }
-return sum;
+int leftSum = 0;
+for(int i=0;i<a.length;i++){
+int rightSum=totalSum-leftSum-a[i];
+if(leftSum==rightSum){
+return i;
 }
-int getRightSum(int a[],int i)
-{
-int sum = 0;
-for(int j=i+1;j<a.length;j++){
-sum=sum+a[j];
+leftSum=leftSum+a[i];
 }
-return sum;
+return -1;
 }
 public static void main(String[]agrs)
 {
-int a[]={10,20,30,40,50,10};
+Scanner sc=new Scanner(System.in);
+System.out.println("Enter Size of Array:");
+int n=sc.nextInt();
+int a[]=new int[n];
+System.out.println("Enter Array Element:");
+for(i=0;i<a.length;i++){
+int a[i]=sc.nextInt();
+}
+try{
 Ei E1=new Ei();
-for(int i=0;i<=a.length;i++)
+int n=E1.getEquilibriumIndex(a);
+if(n!=-1)
 {
-int n=E1.getLeftSum(a,i);
-int m=E1.getRightSum(a,i);
-if(n==m)
-{
-System.out.println("Equivilance index found"+i);
+System.out.println("Equivilance index found"+n);
 }
 else
 {
-System.out.println("Not Equivilance index"+i);
+System.out.println("No Equivilance index");
 }
+}
+catch(NullPointerException e){
+System.err.println("Hello User!!");
+System.err.println("This Array is Empty Please Enter Elements.......");
 }
 }
 }
